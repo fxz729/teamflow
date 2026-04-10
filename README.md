@@ -71,29 +71,36 @@ Plan → Worker（≤3 并发）→ Reviewer，适合 C 类工程任务。
 
 ---
 
-## 安装
+## 一键安装
 
-### 方式一：直接安装（推荐）
-
-在 Claude Code 中运行：
+### macOS / Linux / Git Bash（Windows）
 
 ```bash
-# 克隆仓库到 skills 目录
+curl -fsSL https://raw.githubusercontent.com/fxz729/teamflow/master/install.sh | bash
+```
+
+或克隆到本地：
+
+```bash
 git clone https://github.com/fxz729/teamflow.git ~/.claude/skills/teamflow
 ```
 
-或手动复制本仓库到 Claude Code skills 目录：
+### Windows PowerShell
+
+```powershell
+irm https://raw.githubusercontent.com/fxz729/teamflow/master/install.ps1 | iex
+```
+
+### 手动安装
+
+1. 点击本仓库右上角 **Code → Download ZIP**
+2. 解压到 Claude Code skills 目录：
 
 | 系统 | 路径 |
 |------|------|
 | Windows | `C:\Users\<用户名>\.claude\skills\teamflow` |
 | macOS | `~/.claude/skills/teamflow` |
 | Linux | `~/.claude/skills/teamflow` |
-
-### 方式二：手动下载
-
-1. 点击本仓库右上角 **Code → Download ZIP**
-2. 解压到上述 skills 目录
 
 ---
 
@@ -122,6 +129,8 @@ git clone https://github.com/fxz729/teamflow.git ~/.claude/skills/teamflow
 ```
 teamflow/
 ├── SKILL.md                        # 主 skill 文件
+├── install.sh                      # 一键安装脚本 (macOS/Linux/Git Bash)
+├── install.ps1                     # 一键安装脚本 (Windows PowerShell)
 └── references/
     ├── routing-rules.md            # 任务分类与路由规则
     ├── agent-prompts.md            # Agent 指令模板

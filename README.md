@@ -12,11 +12,11 @@
 
 ## 核心问题
 
-原版 teamflow 有一个致命假设：**复杂任务 = 必须拆分并行**。
+当你让 AI 思考"人生意义"这样的问题时，如果它拆成三个 agent 并行思考——最终只会得到三段孤立的碎片，而非连贯的深度洞见。
 
-但当你让原版 teamflow 思考"人生意义"这样的问题时，它会拆成三个 agent 并行思考——然后你得到三段孤立的碎片，而非连贯的深度洞见。
+**原因：某些思维过程本质上是串行的、不可拆分的。**
 
-**Teamflow 认为：某些思维过程本质上是串行的、不可拆分的。**
+Teamflow 的核心判断：**不是所有任务都适合拆分并行**。它根据任务类型，自动选择最合适的处理策略。
 
 ---
 
@@ -64,42 +64,42 @@ Phase 3（收敛）：综合洞见
     └── 主 agent 整合交锋，输出超越原始视角的洞见
 ```
 
-**Phase 2 的价值**：让结论互相碰撞，在裂缝中诞生真正的洞见。平面并行的致命缺陷是"礼貌性整合"——三个 agent 各说各话，然后主 agent 拼凑出一个不痛不痒的结论。
+**Phase 2 的价值**：让结论互相碰撞，在裂缝中诞生真正的洞见。
 
 #### 标准 Teamflow
 Plan → Worker（≤3 并发）→ Reviewer，适合 C 类工程任务。
 
 ---
 
-## vs 原版 Teamflow
+## 安装
 
-| | 原版 | Teamflow（优化版） |
-|---|---|---|
-| **核心逻辑** | 强制并行 | 智能路由 |
-| **任务分类** | 无 | A/B/C/D 四类 |
-| **开放性思辨** | 强制拆分 → 碎片化 | Solo-Deep → 深度推理 |
-| **并行结构** | 平面并行（Phase 1 only） | 渐进并行（Phase 1→2→3） |
-| **推理链** | 仅结论输出 | 强制保留推理链条 |
-| **Prompt-Engineer** | 预设视角框架 | A 类禁用，B/C 类不预设 |
-| **Failure Recovery** | 简单重试 | 分级降级策略 |
+### 方式一：直接安装（推荐）
 
----
-
-## 快速安装
+在 Claude Code 中运行：
 
 ```bash
-# 方式 1：复制 skill 文件夹到 ~/.claude/skills/
-# 方式 2：手动下载本仓库，放入 Claude Code skills 目录
+# 克隆仓库到 skills 目录
+git clone https://github.com/fxz729/teamflow.git ~/.claude/skills/teamflow
 ```
 
-> **Skill 存放位置**：Windows: `C:\Users\<用户名>\.claude\skills\teamflow`\
-> macOS/Linux: `~/.claude/skills/teamflow`
+或手动复制本仓库到 Claude Code skills 目录：
+
+| 系统 | 路径 |
+|------|------|
+| Windows | `C:\Users\<用户名>\.claude\skills\teamflow` |
+| macOS | `~/.claude/skills/teamflow` |
+| Linux | `~/.claude/skills/teamflow` |
+
+### 方式二：手动下载
+
+1. 点击本仓库右上角 **Code → Download ZIP**
+2. 解压到上述 skills 目录
 
 ---
 
 ## 使用方式
 
-在 Claude Code 中，直接说：
+安装完成后，在 Claude Code 中直接说：
 
 ```
 使用 teamflow [你的任务]
@@ -109,16 +109,11 @@ Plan → Worker（≤3 并发）→ Reviewer，适合 C 类工程任务。
 
 ### 示例
 
-```
-使用 teamflow 思考 AI 是否会取代人类创造力
-→ 检测到 A 类（思辨），触发 Solo-Deep
-
-使用 teamflow 分析竞品产品的差异化策略
-→ 检测到 B 类（信息整合），触发渐进式并行
-
-使用 teamflow 重构项目中认证模块
-→ 检测到 C 类（可执行规划），触发标准 teamflow
-```
+| 输入 | 触发的模式 |
+|------|-----------|
+| `使用 teamflow 思考人生意义` | Solo-Deep |
+| `使用 teamflow 分析竞品产品的差异化策略` | 渐进式并行 |
+| `使用 teamflow 重构项目中认证模块` | 标准 teamflow |
 
 ---
 
@@ -129,7 +124,7 @@ teamflow/
 ├── SKILL.md                        # 主 skill 文件
 └── references/
     ├── routing-rules.md            # 任务分类与路由规则
-    ├── agent-prompts.md            # Agent 指令模板（含 Solo-Deep）
+    ├── agent-prompts.md            # Agent 指令模板
     └── tool-selection.md           # 工具选择策略
 ```
 
@@ -143,14 +138,6 @@ teamflow/
 | 市场调研、竞品分析、多方资料整合 | 渐进式并行 |
 | 功能开发、bug 修复、架构设计 | 标准 teamflow |
 | 单文件编辑、简单问答 | Solo |
-
----
-
-## 目标用户
-
-- **Claude Code 用户**：需要协调复杂任务的开发者
-- **需要深度分析的人群**：市场分析、战略规划、信息整合
-- **处理开放性问题**：哲学思辨、价值判断、战略思考
 
 ---
 

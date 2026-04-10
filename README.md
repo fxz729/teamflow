@@ -2,10 +2,6 @@
 
 **智能 Agent Team 编排框架 for Claude Code** — 一句话，启动专业团队。
 
-```
-🤖 Claude Code Skill    📦 11 Files    🔀 3-Phase Agent Team
-```
-
 > 只需说"使用 teamflow + 你的任务"，剩下的交给框架。
 
 ---
